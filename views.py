@@ -52,7 +52,8 @@ class Handler:
             result = await tr.execute()
             info('Removed records for customer {} and video {}'.format(customer_id, video_id))
 
-            self.__customer_video_dict[customer_id].pop(video_id)
+            if video_id in self.__customer_video_dict[customer_id]:
+                self.__customer_video_dict[customer_id].pop(video_id)
         except asyncio.CancelledError:
             info('Task for customer {} with video {} canceled'.format(customer_id, video_id))
 
